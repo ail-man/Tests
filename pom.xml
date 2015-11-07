@@ -12,6 +12,12 @@
     <description>Some Test Project</description>
     <url>http://www.ail.com</url>
 
+    <properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <javax.javaee-api.version>7.0</javax.javaee-api.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -19,20 +25,39 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>${javax.javaee-api.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
         <pluginManagement>
             <plugins>
-                <!--Is not used now-->
+                <!-- For compile to Java 8-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.3</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                    </configuration>
+                </plugin>
+                <!-- For delete "target" after phase "compile"-->
                 <!--<plugin>-->
-                    <!--<groupId>org.apache.maven.plugins</groupId>-->
-                    <!--<artifactId>maven-compiler-plugin</artifactId>-->
-                    <!--<version>3.3</version>-->
-                    <!--<configuration>-->
-                        <!--<source>1.8</source>-->
-                        <!--<target>1.8</target>-->
-                    <!--</configuration>-->
+                    <!--<artifactId>maven-clean-plugin</artifactId>-->
+                    <!--<version>3.0.0</version>-->
+                    <!--<executions>-->
+                        <!--<execution>-->
+                            <!--<id>auto-clean</id>-->
+                            <!--<phase>compile</phase>-->
+                            <!--<goals>-->
+                                <!--<goal>clean</goal>-->
+                            <!--</goals>-->
+                        <!--</execution>-->
+                    <!--</executions>-->
                 <!--</plugin>-->
             </plugins>
         </pluginManagement>
