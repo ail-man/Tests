@@ -1,0 +1,1 @@
+This is path for resources for JUnit tests
