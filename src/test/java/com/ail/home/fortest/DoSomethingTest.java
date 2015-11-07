@@ -38,7 +38,9 @@ public class DoSomethingTest extends Assert {
     public void shouldFilterResult() throws Exception {
         Optional<String> result = ds.list()
                 .stream()
-                .map((a) -> a.toUpperCase())
+                .peek(System.out::println)
+                .map(String::toUpperCase)
+                .peek(System.out::println)
                 .reduce((a, b) -> a + b);
         assertTrue(result.isPresent());
         assertEquals(TEST, result.get());
