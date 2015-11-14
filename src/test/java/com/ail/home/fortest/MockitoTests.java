@@ -3,11 +3,13 @@ package com.ail.home.fortest;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.junit.Test;
+import org.mockito.InOrder;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.Iterator;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -82,5 +84,22 @@ public class MockitoTests {
         };
         // проверяем, что первый символ массива - это A, и что другие два аргумента равны 0 и 1.
         verify(mock).write(argThat(arrayStartingWithA), eq(0), eq(1));
+    }
+
+    @Test
+    public void Verification_In_Order() {
+        List firstMock = mock(List.class);
+        List secondMock = mock(List.class);
+
+        //using mocks
+        firstMock.add("was called first");
+        secondMock.add("was called second");
+
+        //create inOrder object passing any mocks that need to be verified in order
+        InOrder inOrder = inOrder(firstMock, secondMock);
+
+        //following will make sure that firstMock was called before secondMock
+        inOrder.verify(firstMock).add("was called first");
+        inOrder.verify(secondMock).add("was called second");
     }
 }

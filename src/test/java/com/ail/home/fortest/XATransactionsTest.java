@@ -18,33 +18,33 @@ import static org.mockito.Mockito.*;
 public class XATransactionsTest {
 
     public static final String QUERY = "SELECT * FROM TABLE_NAME";
-    public static final String COLUMN = "COLUMN";
     public static final String COLUMN_VALUE = "Column Value";
-    public static final String ID = "ID";
     private XADataSource mockedXaDataSource;
-    private XAConnection mockedXaConnection;
-    private XAResource mockedXaResource;
-    private Connection mockedConnection;
-    private PreparedStatement mockedPreparedStatement;
-    private ResultSet mockedResultSet;
+
+    private static int counter = 0;
 
     @Before
     public void before() throws SQLException {
         mockedXaDataSource = mock(XADataSource.class);
-        mockedXaConnection = mock(XAConnection.class);
+        XAConnection mockedXaConnection = mock(XAConnection.class);
         when(mockedXaDataSource.getXAConnection()).thenReturn(mockedXaConnection);
-        mockedXaResource = mock(XAResource.class);
+        XAResource mockedXaResource = mock(XAResource.class);
         when(mockedXaConnection.getXAResource()).thenReturn(mockedXaResource);
-        mockedConnection = mock(Connection.class);
+        Connection mockedConnection = mock(Connection.class);
         when(mockedXaConnection.getConnection()).thenReturn(mockedConnection);
-        mockedPreparedStatement = mock(PreparedStatement.class);
+        PreparedStatement mockedPreparedStatement = mock(PreparedStatement.class);
         when(mockedConnection.prepareStatement(anyString())).thenReturn(mockedPreparedStatement);
-        mockedResultSet = mock(ResultSet.class);
+        ResultSet mockedResultSet = mock(ResultSet.class);
         when(mockedPreparedStatement.executeQuery(anyString())).thenReturn(mockedResultSet);
-        when(mockedResultSet.next()).thenReturn(true);
-        Random random = new Random(10000);
-        when(mockedResultSet.getString(anyString())).thenReturn(COLUMN_VALUE);
-        when(mockedResultSet.getLong(anyString())).thenReturn(random.nextLong());
+        when(mockedResultSet.next()).thenAnswer(invocation -> {
+            Object[] args = invocation.getArguments();
+            System.out.println("ARGS: " + args);
+            return counter++ < 10;
+        });
+        Random random = new Random();
+        when(mockedResultSet.getString(anyInt())).thenReturn(COLUMN_VALUE);
+        when(mockedResultSet.getLong(anyInt())).thenAnswer(invocation -> random.nextLong());
+        when(mockedResultSet.getBoolean(anyInt())).thenAnswer(invocation -> random.nextBoolean());
     }
 
     @Test
@@ -53,8 +53,8 @@ public class XATransactionsTest {
         Connection connection = xaConnection.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
         ResultSet rs = preparedStatement.executeQuery(QUERY);
-        if (rs.next()) {
-            System.out.println(rs.getLong(124414) + "\t" + rs.getString("fasfkasf"));
+        while (rs.next()) {
+            System.out.println(rs.getLong(3) + "\t" + rs.getString(3) + "\t" + rs.getBoolean(3));
         }
 
         XAResource xaResource = xaConnection.getXAResource();
