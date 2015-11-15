@@ -13,8 +13,8 @@
     <url>http://www.ail.com</url>
 
     <properties>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.source>1.8</maven.compiler.source>
+        <java.target.version>1.8</java.target.version>
+        <java.source.version>1.8</java.source.version>
         <javax.javaee-api.version>7.0</javax.javaee-api.version>
     </properties>
 
@@ -31,40 +31,51 @@
             <artifactId>mockito-all</artifactId>
             <version>1.10.19</version>
         </dependency>
-
-        <!-- JAVAEE7 -->
+        <!-- JavaEE7 -->
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>${javax.javaee-api.version}</version>
         </dependency>
-
+        <!-- Prime Faces -->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>all-themes</artifactId>
+            <version>1.0.10</version>
+        </dependency>
         <!-- Oracle JDBC Driver -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.37</version>
         </dependency>
-
-        <!-- PRIME FACES -->
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>5.3</version>
-        </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+             <id>prime-repo</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>http://repository.primefaces.org</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
 
     <build>
         <pluginManagement>
             <plugins>
-                <!-- For compile to Java 8-->
+                <!-- For compile to Java 8 -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.3</version>
                     <configuration>
-                        <source>${maven.compiler.source}</source>
-                        <target>${maven.compiler.target}</target>
+                        <source>${java.source.version}</source>
+                        <target>${java.target.version}</target>
                     </configuration>
                 </plugin>
                 <!-- For delete "target" after phase "compile"-->
