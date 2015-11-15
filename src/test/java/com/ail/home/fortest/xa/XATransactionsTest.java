@@ -1,4 +1,4 @@
-package com.ail.home.fortest;
+package com.ail.home.fortest.xa;
 
 import org.junit.Before;
 import org.junit.Test;
