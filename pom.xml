@@ -49,11 +49,12 @@
             <version>1.0.10</version>
         </dependency>
         <!-- Oracle JDBC Driver -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.37</version>
-        </dependency>
+        <!-- No need on GlassFish because it's own implementation -->
+        <!--<dependency>-->
+            <!--<groupId>mysql</groupId>-->
+            <!--<artifactId>mysql-connector-java</artifactId>-->
+            <!--<version>5.1.37</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <repositories>
