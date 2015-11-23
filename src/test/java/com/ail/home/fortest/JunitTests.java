@@ -7,7 +7,7 @@ import org.junit.rules.Timeout;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-public class DoSomethingTest extends Assert {
+public class JunitTests extends Assert {
 
     @Rule
     public final Timeout timeout = new Timeout(1000, TimeUnit.MILLISECONDS);

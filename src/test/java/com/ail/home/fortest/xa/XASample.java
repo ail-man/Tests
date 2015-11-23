@@ -1,6 +1,6 @@
 package com.ail.home.fortest.xa;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlXid;
+//import com.mysql.jdbc.jdbc2.optional.MysqlXid;
 
 import javax.naming.NamingException;
 import javax.sql.XAConnection;
@@ -63,8 +63,7 @@ class XASample {
             // This example uses the com.ibm.db2.jcc.DB2Xid implementation
             // of the Xid interface. This Xid can be used with any JDBC driver
             // that supports JTA.
-            Xid xid1 = new MysqlXid(gtrid, bqual, 100);
-
+            Xid xid1 = new MyXid();
             // Start the distributed transaction on the two connections.
             // The two connections do NOT need to be started and ended together.
             // They might be done in different threads, along with their SQL operations.
