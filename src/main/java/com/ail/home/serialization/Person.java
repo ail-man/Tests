@@ -5,11 +5,13 @@ public class Person implements java.io.Serializable {
 	private String lastName;
 	private int age;
 	private Person spouse;
+	private Gender gender;
 
-	public Person(String fn, String ln, int a) {
+	public Person(String fn, String ln, int a, Gender gender) {
 		this.firstName = fn;
 		this.lastName = ln;
 		this.age = a;
+		this.gender = gender;
 	}
 
 	public String getFirstName() {
@@ -44,12 +46,24 @@ public class Person implements java.io.Serializable {
 		spouse = value;
 	}
 
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
 	public String toString() {
 		return "[Person: firstName=" + firstName +
 				" lastName=" + lastName +
 				" age=" + age +
 				" spouse=" + spouse.getFirstName() +
 				"]";
+	}
+
+	private enum Gender {
+		MALE, FEMALE
 	}
 
 }
