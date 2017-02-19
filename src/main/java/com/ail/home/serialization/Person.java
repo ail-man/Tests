@@ -1,5 +1,8 @@
 package com.ail.home.serialization;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class Person implements Serializable {
@@ -17,6 +20,18 @@ public class Person implements Serializable {
 		this.lastName = ln;
 		this.age = a;
 		this.gender = gender;
+	}
+
+	private void writeObject(ObjectOutputStream stream) throws IOException {
+		// "Encrypt"/obscure the sensitive data
+		age = age >> 2;
+		stream.defaultWriteObject();
+	}
+
+	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+		stream.defaultReadObject();
+		// "Decrypt"/de-obscure the sensitive data
+		age = age << 2;
 	}
 
 	public String getFirstName() {
