@@ -39,7 +39,7 @@ public class SerializationTest {
 			assertEquals(ted.getSpouse().getFirstName(), "Charlotte");
 
 			// Clean up the file
-			new File("tempdata.ser").delete();
+			new File("target/tempdata.ser").delete();
 		} catch (Exception ex) {
 			fail("Exception thrown during test: " + ex.toString());
 		}
