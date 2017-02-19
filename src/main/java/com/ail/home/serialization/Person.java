@@ -59,10 +59,11 @@ public class Person implements java.io.Serializable {
 				" lastName=" + lastName +
 				" age=" + age +
 				" spouse=" + spouse.getFirstName() +
+				" gender=" + gender +
 				"]";
 	}
 
-	private enum Gender {
+	public enum Gender {
 		MALE, FEMALE
 	}
 
