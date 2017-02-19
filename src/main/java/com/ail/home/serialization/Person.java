@@ -1,6 +1,11 @@
 package com.ail.home.serialization;
 
-public class Person implements java.io.Serializable {
+import java.io.Serializable;
+
+public class Person implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	private String firstName;
 	private String lastName;
 	private int age;
