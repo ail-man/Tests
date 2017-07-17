@@ -17,9 +17,20 @@ public class SourceClass {
     @Mapping("numberDst")
     private Integer numberSrc;
 
+    @Getter
+    @Setter
+    private SourceInclude included;
+
     @Mapping("pk")
     public Long getId() {
         return id;
+    }
+
+    public static class SourceInclude {
+        @Getter
+        @Setter
+        @Mapping("d")
+        private String s;
     }
 
 }

@@ -17,4 +17,14 @@ public class DestinationClass {
     @Setter
     private Integer numberDst;
 
+    @Getter
+    @Setter
+    private DestinationInclude included;
+
+    public static class DestinationInclude {
+        @Getter
+        @Setter
+        private String d;
+    }
+
 }
