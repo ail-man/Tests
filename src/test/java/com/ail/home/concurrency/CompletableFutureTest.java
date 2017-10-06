@@ -1,14 +1,17 @@
 package com.ail.home.concurrency;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import org.junit.Test;
 
 public class CompletableFutureTest {
 
     @Test
-    public void completableFutureTest() {
-        CompletableFuture.supplyAsync(this::supply).thenAccept(this::accept);
-        System.out.println("root " + Thread.currentThread().getId());
+    public void completableFutureTest() throws ExecutionException, InterruptedException {
+        CompletableFuture
+                .supplyAsync(this::supply)
+                .thenAccept(this::accept);
+        System.out.println("main " + Thread.currentThread().getId());
         sleep(3000);
     }
 
@@ -22,6 +25,7 @@ public class CompletableFutureTest {
     }
 
     private String supply() {
+        sleep(1000); // REMOVE THIS TO SEE DIFFERENT BEHAVIOUR
         System.out.println("supply " + Thread.currentThread().getId());
         return "message";
     }
